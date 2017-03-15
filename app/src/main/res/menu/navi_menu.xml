@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <item
+        android:title="AXE Дезодорант"
+        android:id="@+id/axe_item_item"
+        android:checkable="true"
+        android:icon="@drawable/ic_delete_black_24dp"
+        />
+
+    <item
+        android:id="@+id/favourites_item"
+        android:checkable="true"
+        android:title="JoyCasino.com"
+    android:icon="@drawable/ic_thumb_down_black_24dp" />
+
+    <item
+        android:id="@+id/avia_item"
+        android:checkable="true"
+        android:title="Aviasales.ru"
+        android:icon="@drawable/ic_flight_land_black_24dp"
+        />
+
+    <item
+        android:id="@+id/hh_item"
+        android:checkable="true"
+        android:title="hh.ru" />
+
+    <item
+        android:id="@+id/settings_item"
+        android:checkable="true"
+        android:title="Настройки" />
+
+</menu>
