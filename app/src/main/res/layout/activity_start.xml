@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Информация в чистом виде! Всего за 25.99$!" />
+        android:text="Ваш виртуальный помощник по навигации в информационной сети SC-1" />
 
     <LinearLayout
         android:background="#87CEEB"

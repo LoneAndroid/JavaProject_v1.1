@@ -38,9 +38,9 @@ public class StartActivity extends AppCompatActivity {
         // устанавливаем для неё картинку
         actionBar.setHomeAsUpIndicator(android.R.drawable.ic_input_delete);
         // устанавливаем заголовок
-        actionBar.setTitle("Title");
+        actionBar.setTitle("Гид V.I.R.O");
         // устанавливаем подзаголовок
-        actionBar.setSubtitle("Subtitle");
+        actionBar.setSubtitle("SN ILL-94522");
 
         // настраиваем тулбар
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); // отображаем ДОМОЙ

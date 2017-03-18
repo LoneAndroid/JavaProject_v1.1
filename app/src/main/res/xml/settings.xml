@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="switch_preference_1"
+        android:title="Язык"
+        android:summaryOff="Язык выключен"
+        android:summaryOn="Язык включен" />
+    <ListPreference
+        android:defaultValue="1"
+        android:entries="@array/languages"
+        android:entryValues="@array/languages"
+        android:key="list_preference_1"
+        android:title="Язык Язык" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="check_box_preference_1"
+        android:title="Язык Язык Язык"
+        android:summaryOff="Язык Язык Язык выключен"
+        android:summaryOn="Язык Язык Язык включен" />
+</PreferenceScreen>
