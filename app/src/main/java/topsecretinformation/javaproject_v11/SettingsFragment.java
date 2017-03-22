@@ -16,27 +16,4 @@ public class SettingsFragment extends PreferenceFragment {
         addPreferencesFromResource(R.xml.settings);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        .getPreferenceManager()
-                .getSharedPreferences()
-                .unregisterOnSharedPreferenceChangeListener(this);
-
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-
-        .getPreferenceManager()
-                .getSharedPreferences()
-                .unregisterOnSharedPreferenceChangeListener(this);
-
-    }
-
-    @Override
-    public void onSharedPreferenceChanget(SharedPreference sharedPreference, )
-        if
 }

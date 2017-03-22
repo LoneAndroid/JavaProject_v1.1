@@ -1,50 +1,61 @@
 package topsecretinformation.javaproject_v11;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.appindexing.Thing;
+import com.google.android.gms.common.api.GoogleApiClient;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class StartActivity extends AppCompatActivity {
 
+    private GoogleApiClient client;
     ActionBarDrawerToggle mDrawerToggle;
     DrawerLayout mDrawerLayout;
-
+    MessageAdapter adapter; // адаптер
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_start);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        // получаём и записываем в переменную ActionBar
         ActionBar actionBar = getSupportActionBar();
-
         // включаем иконку, иначе не будет отображаться
         actionBar.setDisplayHomeAsUpEnabled(true);
         // устанавливаем для неё картинку
-        actionBar.setHomeAsUpIndicator(android.R.drawable.ic_input_delete);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_flight_land_black_24dp);
         // устанавливаем заголовок
-        actionBar.setTitle("Гид V.I.R.O");
+        actionBar.setTitle("Навигационный ИИ NX-7422 Philanthrop");
         // устанавливаем подзаголовок
-        actionBar.setSubtitle("SN ILL-94522");
+        actionBar.setSubtitle("NX-7422");
 
-        // настраиваем тулбар
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true); // отображаем ДОМОЙ
-        getSupportActionBar().setHomeButtonEnabled(true); // включаем ДОМОЙ
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawwwwer_layout); // находим меню
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, 0, 0); // создаём штуку, которая будет анимировать иконку (и не только)
         mDrawerLayout.addDrawerListener(mDrawerToggle); // подписываем её на события открытия и закрытия меню (чтобы она знала, когда нужно анимировать кнопку)
@@ -62,15 +73,13 @@ public class StartActivity extends AppCompatActivity {
                         startActivity(intent);
                         break;
                 }
-
                 mDrawerLayout.closeDrawer(Gravity.START);
-
                 return true;
             }
         });
+
+        initializeChat();
     }
-
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -88,20 +97,45 @@ public class StartActivity extends AppCompatActivity {
         }
     }
 
-
-
-
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-
         mDrawerToggle.syncState();
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-
         mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    private void initializeChat() {
+        // настраиваем список
+        ListView listView = (ListView) findViewById(R.id.listView); // находим список
+        Context context = this; // создаём переменную для контекста
+        int resource = android.R.layout.simple_list_item_1; // создаём переменную для макета отдельного сообщения
+        List<Message> messages = new ArrayList<>(); // создаём переменную для сообщений (пока пустую)
+        adapter = new MessageAdapter(context, resource, messages);
+        listView.setAdapter(adapter);
+        // настраиваем обработку ввода сообщений
+        final EditText editText = (EditText) findViewById(R.id.editText);
+        editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                // actionId - действие, которое произошло
+                if (actionId == EditorInfo.IME_ACTION_DONE) { // если нажали ENTER
+                    String text = editText.getText().toString(); // сохраняем сообщение в переменную
+                    Message message = new Message(text, Message.SENDER_USER);
+                    addMessage(message); // добавляем сообщение в чат
+                }
+                return true;
+            }
+        });
+        Message messageFromBot = new Message("", Message.SENDER_BOT);
+        addMessage(messageFromBot);
+    }
+
+    private void addMessage(final Message message) {
+        adapter.add(message);
     }
 }
