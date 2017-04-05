@@ -29,6 +29,7 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.kuelye.banana.examples.tinydatabaser.TinyDatabaser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +55,7 @@ public class StartActivity extends AppCompatActivity {
         // устанавливаем заголовок
         actionBar.setTitle("Навигационный ИИ NX-7422 Philanthrop");
         // устанавливаем подзаголовок
-        actionBar.setSubtitle("NX-7422");
+        actionBar.setSubtitle("HKH-474");
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawwwwer_layout); // находим меню
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, 0, 0); // создаём штуку, которая будет анимировать иконку (и не только)
@@ -110,6 +111,8 @@ public class StartActivity extends AppCompatActivity {
     }
 
     private void initializeChat() {
+        final TinyDatabaser dataBase = new TinyDatabaser(StartActivity.this, R.raw.globe_x);
+
         // настраиваем список
         ListView listView = (ListView) findViewById(R.id.listView); // находим список
         Context context = this; // создаём переменную для контекста
@@ -125,14 +128,19 @@ public class StartActivity extends AppCompatActivity {
                 // actionId - действие, которое произошло
                 if (actionId == EditorInfo.IME_ACTION_DONE) { // если нажали ENTER
                     String text = editText.getText().toString(); // сохраняем сообщение в переменную
-                    Message message = new Message(text, Message.SENDER_USER);
-                    addMessage(message); // добавляем сообщение в чат
+                    Message message1 = new Message(text, Message.SENDER_USER);
+                    addMessage(message1); // добавляем сообщение в чат
+
+                    String value = dataBase.find(text);
+                    Message message2 = new Message(value, Message.SENDER_BOT);
+                    addMessage(message2);
                 }
                 return true;
             }
         });
-        Message messageFromBot = new Message("", Message.SENDER_BOT);
+        Message messageFromBot = new Message("ASDSADSADASD", Message.SENDER_BOT);
         addMessage(messageFromBot);
+
     }
 
     private void addMessage(final Message message) {

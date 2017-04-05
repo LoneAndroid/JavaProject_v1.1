@@ -34,8 +34,8 @@ public class MessageAdapter extends ArrayAdapter<Message> {
         }
 
         // заполняем вьюшку
-//        TextView messageTextView = (TextView) view.findViewById(R.id.WWWWWWWWWWWWWWWWWWWWW);
-//        messageTextView.setText(message.text);
+        TextView messageTextView = (TextView) view.findViewById(R.id.text_view);
+        messageTextView.setText(message.text);
 
         // возращаем созданный элементик
         return view;

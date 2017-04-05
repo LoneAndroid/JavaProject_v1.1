@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.preference.PreferenceFragment;
 
 /**
- * Created by Marty on 3/18/1975.
+ * Created by Marty McFly on 3/07/1985.
  */
 
 public class SettingsFragment extends PreferenceFragment {
