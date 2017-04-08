@@ -11,8 +11,9 @@
         />
 
     <item
-        android:id="@+id/favourites_item"
+        android:id="@+id/bot_2_item"
         android:checkable="true"
+        android:visible="false"
         android:title="JoyCasino.com"
     android:icon="@drawable/ic_thumb_down_black_24dp" />
 

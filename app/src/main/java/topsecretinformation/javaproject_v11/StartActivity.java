@@ -40,6 +40,7 @@ public class StartActivity extends AppCompatActivity {
     ActionBarDrawerToggle mDrawerToggle;
     DrawerLayout mDrawerLayout;
     MessageAdapter adapter; // адаптер
+    NavigationView mNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,12 +62,12 @@ public class StartActivity extends AppCompatActivity {
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, 0, 0); // создаём штуку, которая будет анимировать иконку (и не только)
         mDrawerLayout.addDrawerListener(mDrawerToggle); // подписываем её на события открытия и закрытия меню (чтобы она знала, когда нужно анимировать кнопку)
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.navi);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        mNavigationView = (NavigationView) findViewById(R.id.navi);
+        mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.favourites_item:
+                    case R.id.bot_2_item:
                         Toast.makeText(StartActivity.this, "Избранное", Toast.LENGTH_LONG).show();
                         break;
                     case R.id.settings_item:
@@ -134,11 +135,17 @@ public class StartActivity extends AppCompatActivity {
                     String value = dataBase.find(text);
                     Message message2 = new Message(value, Message.SENDER_BOT);
                     addMessage(message2);
+
+                    if (text.equals("Пряник вкусный")) {
+                        MenuItem bot2Item = mNavigationView.getMenu().findItem(R.id.bot_2_item);
+                        bot2Item.setVisible(true);
+                        addMessage(new Message("Вкусный пряник! Дополнительные функции бота разблокированы!", Message.SENDER_BOT));
+                    }
                 }
                 return true;
             }
         });
-        Message messageFromBot = new Message("ASDSADSADASD", Message.SENDER_BOT);
+        Message messageFromBot = new Message("Вас приветствует Philanthrop! Если не знаете как задать вопрос напишите '!help list' ", Message.SENDER_BOT);
         addMessage(messageFromBot);
 
     }
