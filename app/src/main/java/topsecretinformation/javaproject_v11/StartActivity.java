@@ -3,7 +3,6 @@ package topsecretinformation.javaproject_v11;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -15,20 +14,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.appindexing.Thing;
-import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.kuelye.banana.examples.tinydatabaser.TinyDatabaser;
 
 import java.util.ArrayList;
@@ -36,7 +30,6 @@ import java.util.List;
 
 public class StartActivity extends AppCompatActivity {
 
-    private GoogleApiClient client;
     ActionBarDrawerToggle mDrawerToggle;
     DrawerLayout mDrawerLayout;
     MessageAdapter adapter; // адаптер
@@ -81,6 +74,12 @@ public class StartActivity extends AppCompatActivity {
         });
 
         initializeChat();
+
+        MobileAds.initialize(getApplicationContext(), "ca-app-pub-8052265668976531~6350845007");
+
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
     @Override
