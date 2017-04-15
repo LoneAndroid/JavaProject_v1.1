@@ -26,7 +26,7 @@
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/puzzle_sc" />
+            app:srcCompat="@drawable/sir_c_3po" />
 
         <LinearLayout
             android:layout_width="match_parent"

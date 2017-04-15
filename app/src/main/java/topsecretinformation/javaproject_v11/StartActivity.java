@@ -18,7 +18,6 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -34,6 +33,7 @@ public class StartActivity extends AppCompatActivity {
     DrawerLayout mDrawerLayout;
     MessageAdapter adapter; // адаптер
     NavigationView mNavigationView;
+    TinyDatabaser dataBase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +61,7 @@ public class StartActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.bot_2_item:
-                        Toast.makeText(StartActivity.this, "Избранное", Toast.LENGTH_LONG).show();
+                        dataBase = new TinyDatabaser(StartActivity.this, R.raw.starcraft_terran_database);
                         break;
                     case R.id.settings_item:
                         Intent intent = new Intent(StartActivity.this, SettingsActivityh.class);
@@ -111,7 +111,7 @@ public class StartActivity extends AppCompatActivity {
     }
 
     private void initializeChat() {
-        final TinyDatabaser dataBase = new TinyDatabaser(StartActivity.this, R.raw.globe_x);
+        dataBase = new TinyDatabaser(StartActivity.this, R.raw.globe_x);
 
         // настраиваем список
         ListView listView = (ListView) findViewById(R.id.listView); // находим список
@@ -138,7 +138,7 @@ public class StartActivity extends AppCompatActivity {
                     if (text.equals("Пряник вкусный")) {
                         MenuItem bot2Item = mNavigationView.getMenu().findItem(R.id.bot_2_item);
                         bot2Item.setVisible(true);
-                        addMessage(new Message("Вкусный пряник! Дополнительные функции бота разблокированы!", Message.SENDER_BOT));
+                        addMessage(new Message("Вкусный Пряник! Получена информация о скрытом контенте! Чтобы получить список контента введите команду !newInf", Message.SENDER_BOT));
                     }
                 }
                 return true;
